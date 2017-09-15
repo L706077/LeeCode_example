@@ -340,6 +340,52 @@ public:
     }
 };
 ```
+<br/>
+
+### 206. Reverse Linked List
+
+Reverse a singly linked list.
+```C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        struct ListNode * prev, *current, *next;   
+        prev   = NULL;
+        current = head;
+        while (current ) //current != NULL
+        {
+            next  = current->next;  
+            current->next = prev;   
+            prev = current;
+            current = next;
+        }
+        return prev;  
+
+    }
+};
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
