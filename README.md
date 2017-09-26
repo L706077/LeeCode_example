@@ -64,9 +64,10 @@ public:
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
-
+```C++
 Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 Output: 7 -> 0 -> 8
+```
 ```C++
 /**
  * Definition for singly-linked list.
@@ -137,6 +138,78 @@ public:
 };
 ```
 <br/>
+
+###  445. Add Two Numbers II
+You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Follow up:
+What if you cannot modify the input lists? In other words, reversing the lists is not allowed.
+
+Example:
+```C++
+Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 8 -> 0 -> 7
+```
+```C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* l3, * head;
+        l3=(struct ListNode*)malloc(sizeof(struct ListNode));
+        l3->next=NULL;
+        std::stack<int> m1, m2;
+        int tmp1=0, tmp2=0, tmp3=0, sum=0;        
+        while(l1){
+            m1.push(l1->val);
+            l1=l1->next;
+        }
+        while(l2){
+            m2.push(l2->val);
+            l2=l2->next;
+        }
+        while(!m2.empty() || !m1.empty())
+        {    
+            tmp2=0;
+            tmp1=0;
+            if(!m1.empty())
+            {
+                tmp1=m1.top();
+                m1.pop();
+            }
+            if(!m2.empty())
+            {
+                tmp2=m2.top();
+                m2.pop();
+            }
+            tmp3=tmp1+tmp2;
+            sum=sum+tmp3;
+            l3->val = sum % 10;
+            head=(struct ListNode*)malloc(sizeof(struct ListNode));
+            head->next=l3;
+            l3=head;     
+            sum=sum/10;
+        }
+        if(sum!=0)
+        {
+            l3->val = sum % 10;
+            head=(struct ListNode*)malloc(sizeof(struct ListNode));
+            head->next=l3;
+            l3=head;
+        }
+        return l3->next;
+    }
+};
+```
 
 ------
 
