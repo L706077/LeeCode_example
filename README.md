@@ -372,10 +372,8 @@ public:
 <br/>
 
 ### 160. Intersection of Two Linked Lists
-Write a program to find the node at which the intersection of two singly linked lists begins.
-
-
-For example, the following two linked lists:
+Write a program to find the node at which the intersection of two singly linked lists begins.<br/>
+For example, the following two linked lists:<br/>
 ```C++
 A:          a1 → a2
                    ↘
@@ -383,11 +381,65 @@ A:          a1 → a2
                    ↗            
 B:     b1 → b2 → b3
 ```
-begin to intersect at node c1.
+begin to intersect at node c1.<br/>
+Notes:<br/>
+If the two linked lists have no intersection at all, return null.<br/>
+The linked lists must retain their original structure after the function returns.<br/>
+You may assume there are no cycles anywhere in the entire linked structure.<br/>
+Your code should preferably run in O(n) time and use only O(1) memory.<br/>
 
-Hint:
+Hint: find diff between A and B, then move long list to the diff position.<br/>
 ```C++
-
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+            ListNode * firstA=headA,* firstB=headB;
+            int count_A=0, count_B=0, diff=0;
+            while(firstA){
+                firstA=firstA->next;
+                count_A++;
+            }
+            while(firstB){
+                firstB=firstB->next;
+                count_B++;
+            }
+            if(count_A>=count_B){   
+                int A=0;
+                diff=count_A-count_B;
+                while(A<diff){
+                    headA=headA->next;
+                    A++;
+                }
+                while(headA){
+                    if(headA==headB) return headA;
+                    headA=headA->next;
+                    headB=headB->next;
+                }
+            }
+            else{
+                int B=0;
+                diff=count_B-count_A;
+                while(B<diff){
+                    headB=headB->next;
+                    B++;
+                }
+                while(headB){
+                    if(headB==headA) return headB;
+                    headA=headA->next;
+                    headB=headB->next;
+                }
+            }
+            return NULL;
+    }
+};
 ```
 
 ------
