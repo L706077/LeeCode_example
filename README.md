@@ -298,6 +298,46 @@ public:
 ```
 <br/>
 
+### 203. Remove Linked List Elements
+Remove all elements from a linked list of integers that have value val.
+
+Example
+Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
+Return: 1 --> 2 --> 3 --> 4 --> 5
+```C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode *first, * tmp, * ptr;
+        first = (ListNode*)malloc(sizeof(ListNode));
+        ptr = first;
+        first->next=head;
+        while(ptr->next)
+        {
+            if(ptr->next->val==val)   
+            {   
+                tmp = ptr-> next;
+                ptr->next = ptr->next->next;
+                delete tmp;
+            }
+            else
+            {
+                ptr = ptr->next;
+            }
+        }        
+        return first->next; 
+    }
+};
+```
+<br/>
 
 ------
 
