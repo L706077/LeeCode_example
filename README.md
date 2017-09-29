@@ -711,19 +711,36 @@ public:
 
     }
 };
-
 ```
+<br/>
 
+-----
 
+## String
 
+### 58. Length of Last Word
+Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.<br/>
+If the last word does not exist, return 0.<br/>
+Note: A word is defined as a character sequence consists of non-space characters only.<br/>
+For example, <br/>
+Given s = "Hello World",<br/>
+return 5.<br/>
 
-
-
-
-
-
-
-
+Hint: first remove end ' ', count from end
+```C++
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+         int right = s.size() - 1 , count = 0 ;
+         while (right >= 0 && s[right] == ' ' ) -- right;
+         while (right >= 0 && s[right] != ' ' ) {
+             -- right; 
+             ++ count;
+        }
+        return count;   
+    }
+};
+```
 
 
 
