@@ -58,7 +58,28 @@ public:
     }
 };
 ```
-
+```C++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int i=0;
+        int k=numbers.size()-1;
+        vector<int> output;
+        while(i<k) {
+            while(numbers[i]+numbers[k]<target)
+                i++;
+            while(numbers[i]+numbers[k]>target)
+                k--;
+            if(numbers[i]+numbers[k]==target && i!=k) {
+                output.push_back(i+1);
+                output.push_back(k+1);
+                break;
+            }
+        }
+        return output;
+    }
+};
+```
 <br/>
 
 
