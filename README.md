@@ -82,6 +82,43 @@ public:
 ```
 <br/>
 
+###  1. Three Sum
+给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。<br/>
+
+注意：答案中不可以包含重复的三元组。
+```C++
+输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
+输出：7 -> 0 -> 8
+原因：342 + 465 = 807
+```
+
+**O(n^2):**
+```C++
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(),nums.end());
+        if (nums.empty() || nums.back() < 0 || nums.front() > 0 || nums.size()<3) return {}; 
+        for(int i=0; i<nums.size()-2; i++) {
+            if(nums[i]>0) break;
+            if(i > 0 && nums[i] == nums[i-1]) continue; 
+            int j=i+1, k=nums.size()-1;
+            while(j<k) {
+              if(nums[i]+nums[j]+nums[k]==0) {
+                  res.push_back({nums[i],nums[j],nums[k]});
+                  while(j < k && nums[j]==nums[j+1]) j++;
+                  while(j < k && nums[k]==nums[k-1]) k--;
+                  j++;
+                  k--;
+             } else if(nums[i]+nums[j]+nums[k]<0) j++;
+               else k--;
+            }
+        }
+        return res;
+    }
+};
+<br/>
 
 ## Linkedlist
 
